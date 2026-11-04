@@ -1,0 +1,109 @@
+
+.shop-page {
+  background: #f5f1e9;
+  min-height: 100vh;
+  padding: 50px 6%;
+}
+
+.shop-heading {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.shop-heading h1 {
+  font-family: Georgia, serif;
+  font-size: 45px;
+  font-weight: 400;
+  color: #30291f;
+}
+
+.shop-heading p {
+  color: #777064;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.shop-card {
+  background: white;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.shop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px #00000015;
+}
+
+.shop-image {
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-image img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+.shop-details {
+  padding: 15px 5px;
+}
+
+.shop-category {
+  color: #9a8464;
+  text-transform: capitalize;
+  font-size: 13px;
+}
+
+.shop-details h3 {
+  font-size: 15px;
+  font-weight: 500;
+  height: 40px;
+  overflow: hidden;
+}
+
+.shop-rating {
+  font-size: 13px;
+  color: #777;
+}
+
+.shop-price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.shop-button {
+  width: 100%;
+  padding: 12px;
+  background: #30291f;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.shop-button:hover {
+  background: #8b7659;
+}
+
+.status {
+  text-align: center;
+  padding: 80px;
+}
+
+@media (max-width: 900px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
