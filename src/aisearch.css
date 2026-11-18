@@ -1,0 +1,161 @@
+.ai-search {
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 18px;
+  background: #f8f8f8;
+  border-radius: 12px;
+}
+
+.ai-search-row {
+  display: flex;
+  gap: 10px;
+}
+
+.ai-search-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.ai-search-row button {
+  padding: 12px 22px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* AI Fashion Finder Container */
+.ai-search {
+  max-width: 900px;
+  margin: 45px auto;
+  padding: 30px;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f6f3ef 100%
+  );
+  border: 1px solid #e9e4dd;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.ai-search:hover {
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.1);
+}
+
+/* AI Heading */
+.ai-search h2 {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #242424;
+  margin: 0 0 22px;
+}
+
+/* Input + Button Row */
+.ai-search-row {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+/* Search Input */
+.ai-search-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 17px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #222;
+  background: #fff;
+  border: 1px solid #dedbd6;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.ai-search-row input::placeholder {
+  color: #999;
+}
+
+.ai-search-row input:focus {
+  border-color: #a88b68;
+  box-shadow: 0 0 0 4px rgba(168, 139, 104, 0.12);
+}
+
+/* AI Search Button */
+.ai-search-row button {
+  padding: 16px 30px;
+  background: linear-gradient(135deg, #242424, #444);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.ai-search-row button:hover {
+  background: linear-gradient(135deg, #a88b68, #806448);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(128, 100, 72, 0.25);
+}
+
+.ai-search-row button:active {
+  transform: scale(0.97);
+}
+
+.ai-search-row button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .ai-search {
+    margin: 25px 15px;
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .ai-search h2 {
+    font-size: 23px;
+  }
+
+  .ai-search-row {
+    flex-direction: column;
+  }
+
+  .ai-search-row input,
+  .ai-search-row button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ai-search-row button {
+    padding: 15px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .ai-search,
+  .ai-search-row input,
+  .ai-search-row button {
+    transition: none;
+  }
+}

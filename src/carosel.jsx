@@ -1,35 +1,60 @@
-import { useState, useEffect } from "react";
 
-function Shop() {
-  const [products, setProducts] = useState([]);
+import { Link } from "react-router-dom";
+  
 
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-      .catch(err => console.log(err));
-  }, []);
-
+export default function Shop() {
   return (
-    <div className="carousel-container">
+    <main className="home-page">
+      <section className="fashion-hero">
+        <img
+          className="fashion-hero-image"
+          src="/images/banner.png"
+          alt="StyleOne Fall Collection"
+        />
 
-      <div className="product-card">
-        <img src="/images/banner.png" alt="Fall Collection" />
-      </div>
+        <div className="fashion-hero-overlay" />
 
-      <div className="home-eye">
-        <h1>The Fall<br />Collection</h1>
+        <div className="fashion-hero-content">
+          <span className="fashion-eyebrow">
+            STYLEONE / NEW SEASON
+          </span>
 
+          <h1>
+            The Art of
+            <br />
+            <em>Everyday Style.</em>
+          </h1>
+
+          <p>
+            Discover effortless essentials, bold silhouettes,
+            and timeless pieces curated for your wardrobe.
+          </p>
+
+          <Link to="/shop" className="fashion-shop-btn">
+            EXPLORE COLLECTION
+            <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
+
+        <div className="fashion-hero-bottom">
+          <span>EST. 2026 — STYLEONE</span>
+          <span>DISCOVER YOUR STYLE ↓</span>
+        </div>
+      </section>
+
+      <section className="fashion-intro">
+        <span>THE STYLEONE EDIT</span>
+        <h2>
+          Wear what makes
+          <br />
+          you feel <em>you.</em>
+        </h2>
         <p>
-          Discover timeless styles and elevate your everyday look
-          with our latest collection.
+          From everyday staples to statement pieces,
+          discover fashion that fits your story.
         </p>
-
-        <button>Shop Now</button>
-      </div>
-
-    </div>
+        <Link to="/shop">SHOP ALL PRODUCTS ↗</Link>
+      </section>
+    </main>
   );
 }
-
-export default Shop;

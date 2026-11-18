@@ -1,34 +1,116 @@
- 
+
 import { useState, useEffect } from "react";
 import "./shop.css";
+import { Link } from "react-router-dom";
+import AISearch from "./AIsearch.jsx";
+import { useSearchParams } from "react-router-dom";
 
 export default function ShopItems() {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [filteredProducts, setFilteredProducts] = useState(null);
 
+  const [loading, setLoading] = useState(true);
+  const [searching, setSearching] = useState(false);
+
+  const [error, setError] = useState("");
+  const [searchError, setSearchError] = useState("");
+
+  const[searchfilter,setsearchfilter]=useSearchParams()
+  const typeFilter = searchfilter.get("type")
+
+
+  // Fetch products from FakeStore API
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
-      .then(res => {
+      .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch products");
         }
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         setProducts(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
   }, []);
 
-  if (loading) return <h2 className="status">Loading products...</h2>;
+  // AI-powered product filtering
+  async function handleAISearch(prompt) {
+    try {
+      setSearching(true);
+      setSearchError("");
 
-  if (error) return <h2 className="status">{error}</h2>;
+      const response = await fetch(
+        "http://localhost:5000/api/ai/search",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: prompt
+          })
+        }
+      );
 
+      if (!response.ok) {
+        throw new Error("AI search failed");
+      }
+
+      const filters = await response.json();
+
+      console.log("AI Filters:", filters);
+
+      const results = products.filter((product) => {
+        // Check product category
+        const categoryMatch =
+          !filters.category ||
+          product.category.toLowerCase() ===
+            filters.category.toLowerCase();
+
+        // Convert USD price to INR (approximation)
+        const priceINR = product.price * 85;
+
+        // Check maximum budget
+        const priceMatch =
+          filters.maxPriceINR == null ||
+          priceINR <= filters.maxPriceINR;
+
+        return categoryMatch && priceMatch;
+      });
+
+      setFilteredProducts(results);
+
+    } catch (err) {
+      console.error("AI Search Error:", err);
+      setSearchError(err.message);
+    } finally {
+      setSearching(false);
+    }
+  }
+
+  // Reset AI search
+  function showAllProducts() {
+    setFilteredProducts(null);
+    setSearchError("");
+  }
+
+  if (loading) {
+    return <h2 className="status">Loading products...</h2>;
+  }
+
+  if (error) {
+    return <h2 className="status">{error}</h2>;
+  }
+const baseProducts = filteredProducts ?? products;
+
+const displayedProducts = typeFilter
+  ? baseProducts.filter((product) => product.category === typeFilter)
+  : baseProducts;
   return (
     <div className="shop-page">
 
@@ -37,39 +119,97 @@ export default function ShopItems() {
         <p>Discover your perfect style with StyleOne.</p>
       </div>
 
-      <div className="products-grid">
-        {products.map(product => (
-          <div className="shop-card" key={product.id}>
+      {/* AI Fashion Search */}
+      <AISearch onSearch={handleAISearch} />
 
-            <div className="shop-image">
-              <img src={product.image} alt={product.title} />
-            </div>
+     <div className="filter-buttons">
+  <button onClick={() => setsearchfilter({})}>
+    All
+  </button>
 
-            <div className="shop-details">
-              <p className="shop-category">{product.category}</p>
+  <button onClick={() =>  setsearchfilter({ type: "men's clothing" })}>
+    Men
+  </button>
 
-              <h3>{product.title}</h3>
+  <button onClick={() => setsearchfilter({ type: "women's clothing" })}>
+    Women
+  </button>
 
-              <div className="shop-rating">
-                ⭐ {product.rating.rate} ({product.rating.count})
+  <button onClick={() =>  setsearchfilter({ type: "electronics" })}>
+    Electronics
+  </button>
+
+  <button onClick={() =>  setsearchfilter({ type: "jewelery" })}>
+    Jewellery
+  </button>
+</div>
+
+      {searching && (
+        <p className="status">
+          AI is finding your outfits...
+        </p>
+      )}
+
+      {searchError && (
+        <p className="status">
+          {searchError}
+        </p>
+      )}
+
+      {filteredProducts !== null && (
+        <button
+          type="button"
+          onClick={showAllProducts}
+          className="shop-button"
+        >
+          Show All Products
+        </button>
+      )}
+
+      {/* Products */}
+      {displayedProducts.length === 0 ? (
+        <p className="status">
+          No matching products found. Try another preference.
+        </p>
+      ) : (
+        <div className="products-grid">
+          {displayedProducts.map((product) => (
+            <div className="shop-card" key={product.id}>
+
+              <div className="shop-image">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                />
               </div>
 
-              <p className="shop-price">
-                ₹{(product.price * 85).toFixed(0)}
-              </p>
+              <div className="shop-details">
+                <p className="shop-category">
+                  {product.category}
+                </p>
 
-              <button className="shop-button">
-                View Product
-              </button>
+                <h3>{product.title}</h3>
+
+                <div className="shop-rating">
+                  ⭐ {product.rating.rate} ({product.rating.count})
+                </div>
+
+                <p className="shop-price">
+                  ₹{(product.price * 85).toFixed(0)}
+                </p>
+
+                <Link to={`/product/${product.id}`}>
+                  <button className="shop-button">
+                    View Product
+                  </button>
+                </Link>
+              </div>
+
             </div>
-
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
     </div>
   );
 }
-
- 
- 

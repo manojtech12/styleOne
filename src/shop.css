@@ -107,3 +107,170 @@
     grid-template-columns: 1fr;
   }
 }
+
+.home-page {
+  width: 100%;
+  overflow: hidden;
+}
+
+.fashion-hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #252522;
+  color: white;
+}
+
+.fashion-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.fashion-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.35) 55%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+.fashion-hero-content {
+  position: relative;
+  z-index: 2;
+  width: min(90%, 1250px);
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+.fashion-eyebrow {
+  font-size: 12px;
+  letter-spacing: 4px;
+  font-weight: 500;
+}
+
+.fashion-hero-content h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(48px, 7vw, 105px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -3px;
+  margin: 25px 0;
+}
+
+.fashion-hero-content h1 em {
+  font-weight: 400;
+}
+
+.fashion-hero-content p {
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: #e4e4e4;
+  margin-bottom: 35px;
+}
+
+.fashion-shop-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+  padding: 18px 25px;
+  background: #fff;
+  color: #111;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  transition: 0.3s ease;
+}
+
+.fashion-shop-btn:hover {
+  background: #d9c4a7;
+  transform: translateY(-3px);
+}
+
+.fashion-hero-bottom {
+  position: absolute;
+  bottom: 30px;
+  left: 5%;
+  right: 5%;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.fashion-intro {
+  padding: 110px 20px;
+  text-align: center;
+  background: #f7f5f1;
+}
+
+.fashion-intro > span {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #777;
+}
+
+.fashion-intro h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 25px 0;
+  color: #222;
+}
+
+.fashion-intro p {
+  max-width: 450px;
+  margin: 0 auto 30px;
+  line-height: 1.8;
+  color: #777;
+}
+
+.fashion-intro a {
+  color: #222;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-decoration: none;
+  border-bottom: 1px solid #222;
+  padding-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .fashion-hero {
+    min-height: 75vh;
+  }
+
+  .fashion-hero-content {
+    padding: 90px 0;
+  }
+
+  .fashion-hero-content h1 {
+    letter-spacing: -1px;
+  }
+
+  .fashion-hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .fashion-hero-bottom {
+    font-size: 8px;
+    gap: 12px;
+  }
+
+  .fashion-intro {
+    padding: 75px 20px;
+  }
+}

@@ -346,3 +346,164 @@ header {
 }
 
 }
+
+/* PREMIUM STYLEONE NAVBAR */
+
+header {
+  width: 100%;
+  height: 85px;
+  background: rgba(250, 248, 244, 0.97);
+  border-bottom: 1px solid #e9e3da;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+}
+
+.nav-bar {
+  width: 100%;
+  max-width: 1450px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* BRAND LOGO */
+
+.shop-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  color: #29231d;
+  white-space: nowrap;
+}
+
+.shop-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* NAVIGATION LINKS */
+
+.info-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+}
+
+.info-menu a {
+  position: relative;
+  text-decoration: none;
+  color: #554c41;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding: 10px 0;
+  transition: color 0.3s ease;
+}
+
+/* UNDERLINE ANIMATION */
+
+.info-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 0;
+  height: 2px;
+  background-color: #a88b68;
+  transition: width 0.3s ease;
+}
+
+.info-menu a:hover {
+  color: #a88b68;
+}
+
+.info-menu a:hover::after,
+.info-menu a.active::after {
+  width: 100%;
+}
+
+.info-menu a.active {
+  color: #30291f;
+}
+
+/* ICONS AND CART */
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icons a,
+.nav-icons button {
+  color: #30291f;
+  font-size: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-icons a:hover,
+.nav-icons button:hover {
+  color: #a88b68;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE NAVBAR */
+
+@media (max-width: 768px) {
+  header {
+    height: auto;
+    min-height: 75px;
+  }
+
+  .nav-bar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px 5%;
+    gap: 15px;
+  }
+
+  .shop-title {
+    font-size: 30px;
+  }
+
+  .info-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .info-menu a {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+
+  .nav-icons {
+    gap: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .info-menu a,
+  .info-menu a::after,
+  .nav-icons a,
+  .nav-icons button {
+    transition: none;
+  }
+}
+  
